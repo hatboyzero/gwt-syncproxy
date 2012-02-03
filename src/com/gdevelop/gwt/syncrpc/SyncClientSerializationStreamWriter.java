@@ -264,7 +264,8 @@ public class SyncClientSerializationStreamWriter extends AbstractSerializationSt
   
   private SerializationPolicy serializationPolicy;
 
-  private final Serializer serializer;
+  @SuppressWarnings("unused")
+private final Serializer serializer;
 
   public SyncClientSerializationStreamWriter(Serializer serializer,
       String moduleBaseURL, String serializationPolicyStrongName, SerializationPolicy serializationPolicy) {

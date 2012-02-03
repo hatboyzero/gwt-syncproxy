@@ -34,6 +34,7 @@ import java.util.Map;
 
 
 public class RemoteServiceInvocationHandler implements InvocationHandler{
+  @SuppressWarnings("rawtypes")
   private static final Map<Class, ResponseReader> JPRIMITIVETYPE_TO_RESPONSEREADER = 
       new HashMap<Class, ResponseReader>();
   static{
@@ -82,6 +83,7 @@ public class RemoteServiceInvocationHandler implements InvocationHandler{
     this.waitForInvocation = waitForInvocation;
   }
   
+  @SuppressWarnings({ "rawtypes", "unchecked" })
   public Object invoke(Object proxy, Method method, Object[] args) throws Throwable{
     RemoteServiceSyncProxy syncProxy = new 
       RemoteServiceSyncProxy(moduleBaseURL, 
@@ -97,7 +99,7 @@ public class RemoteServiceInvocationHandler implements InvocationHandler{
     
     SerializationStreamWriter streamWriter = syncProxy.createStreamWriter();
 
-    AsyncCallback callback = null;
+	AsyncCallback callback = null;
     Class[] paramTypes = method.getParameterTypes();
     try{
       // Determine whether sync or async
@@ -201,6 +203,7 @@ public class RemoteServiceInvocationHandler implements InvocationHandler{
     }
   }
   
+  @SuppressWarnings("rawtypes")
   private void writeParam(SerializationStreamWriter streamWriter, 
           Class paramType, Object paramValue) throws SerializationException {
     if (paramType == boolean.class){
@@ -241,6 +244,8 @@ public class RemoteServiceInvocationHandler implements InvocationHandler{
       streamWriter.writeObject(paramValue);
     }
   }
+  
+  @SuppressWarnings("rawtypes")
   private ResponseReader getReaderFor(Class type) {
     ResponseReader primitiveResponseReader = JPRIMITIVETYPE_TO_RESPONSEREADER.get(type);
     if (primitiveResponseReader != null){

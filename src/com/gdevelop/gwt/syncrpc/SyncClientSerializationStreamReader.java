@@ -47,6 +47,7 @@ import java.util.Map;
  * @see com.google.gwt.user.server.rpc.impl.ServerSerializationStreamWriter
  * @see com.google.gwt.user.server.rpc.impl.ServerSerializationStreamReader
  */
+@SuppressWarnings("serial")
 public class SyncClientSerializationStreamReader extends AbstractSerializationStreamReader{
   private static final char JS_ESCAPE_CHAR = '\\';
   
